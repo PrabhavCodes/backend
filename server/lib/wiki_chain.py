@@ -1,8 +1,8 @@
-from models.models import llm
+from ..models.models import llm
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, BaseMessage
 from langgraph.graph import StateGraph, START, END, add_messages
 from langgraph.prebuilt import ToolNode
-from lib.explorer import explore
+from ..lib.explorer import explore
 from typing import TypedDict, Annotated, Sequence
 from pydantic import BaseModel, Field
 
@@ -84,10 +84,9 @@ builder.add_edge("wiki_refine_response", END)
 
 graph = builder.compile()
 
-# Execute the graph
+# # Execute the graph
 # result = graph.stream(
 #     {
-#         "query": "What are electrons",
 #         "messages": [HumanMessage(content="French Revolution")]
 #     },
 #     stream_mode="values"
@@ -96,12 +95,12 @@ graph = builder.compile()
 # final_state = None
 # for s in result:
 #     final_state = s
-    # Optional: Print intermediate states for debugging
-    # if "messages" in s and s["messages"]:
-    #     message = s["messages"][-1]
-    #     message.pretty_print()
+#     # Optional: Print intermediate states for debugging
+#     if "messages" in s and s["messages"]:
+#         message = s["messages"][-1]
+#         message.pretty_print()
 
-# Output the final response
+# # Output the final response
 # if final_state and "final_response" in final_state and final_state["final_response"]:
 #     response = final_state["final_response"]
 #     print(f"Topic: {response.topic}")
@@ -114,7 +113,6 @@ graph = builder.compile()
 def wiki_chain(query: str):
     result = graph.stream(
         {
-            "query": query,
             "messages": [HumanMessage(content=query)]
         },
         stream_mode="values"
@@ -126,13 +124,13 @@ def wiki_chain(query: str):
         return final_state["final_response"]
     return None
 
-if __name__ == "__main__":
-    # Example usage when running the file directly
-    query = "French Revolution"
-    response = wiki_chain(query)
-    if response:
-        print(f"Topic: {response.topic}")
-        print(f"Content:\n{response.content}")
-        print(f"Metadata: {response.metadata}")
-    else:
-        print("No explanation generated")
+# if __name__ == "__main__":
+#     # Example usage when running the file directly
+#     query = "French Revolution"
+#     response = wiki_chain(query)
+#     if response:
+#         print(f"Topic: {response.topic}")
+#         print(f"Content:\n{response.content}")
+#         print(f"Metadata: {response.metadata}")
+#     else:
+#         print("No explanation generated")
