@@ -6,3 +6,5 @@ langchain-ollama
 langchain
 langgraph
 pydantic
+wikipedia
+langchain_community
