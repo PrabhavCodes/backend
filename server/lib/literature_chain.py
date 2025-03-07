@@ -164,26 +164,37 @@ builder.add_edge("analyzer_3", "compare_summaries")
 builder.add_edge("compare_summaries", END)
 graph = builder.compile()
 
-initial_state = {
-    "pages_1": pages_1,
-    "pages_2": pages_2,
-    "pages_3": pages_3,
-    "main_summary": None,
-    "summary_a": None,
-    "summary_b": None,
-    "final_response": ""
-}
+# initial_state = {
+#     "pages_1": pages_1,
+#     "pages_2": pages_2,
+#     "pages_3": pages_3,
+#     "main_summary": None,
+#     "summary_a": None,
+#     "summary_b": None,
+#     "final_response": ""
+# }
 
-def generate_comparison_report() -> str:
+def generate_comparison_report(pages_1,pages_2,pages_3) -> str:
     """
     Invoke the LangGraph workflow and return the final comparison response.
     
     Returns:
         str: The final_response containing comparisons between main_summary and summary_a/b
+
     """
+        
+    initial_state = {
+        "pages_1": pages_1,
+        "pages_2": pages_2,
+        "pages_3": pages_3,
+        "main_summary": None,
+        "summary_a": None,
+        "summary_b": None,
+        "final_response": ""
+    }
     response = graph.invoke(initial_state)
     return response["final_response"]
 
-final_response = generate_comparison_report()
-print("Final Comparison Response:")
-print(final_response)
+# final_response = generate_comparison_report()
+# print("Final Comparison Response:")
+# print(final_response)
