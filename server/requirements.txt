@@ -8,3 +8,4 @@ langgraph
 pydantic
 wikipedia
 langchain_community
+langgraph
