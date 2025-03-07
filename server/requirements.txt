@@ -1,0 +1,8 @@
+# Basic requirements for a Python server
+
+uvicorn==0.34.0
+fastapi==0.115.11
+langchain-ollama
+langchain
+langgraph
+pydantic
