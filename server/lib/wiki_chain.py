@@ -125,3 +125,14 @@ def wiki_chain(query: str):
     if final_state and "final_response" in final_state and final_state["final_response"]:
         return final_state["final_response"]
     return None
+
+if __name__ == "__main__":
+    # Example usage when running the file directly
+    query = "French Revolution"
+    response = wiki_chain(query)
+    if response:
+        print(f"Topic: {response.topic}")
+        print(f"Content:\n{response.content}")
+        print(f"Metadata: {response.metadata}")
+    else:
+        print("No explanation generated")
